@@ -1,17 +1,19 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import { axiosWithAuth } from '../axiosWithAuth.js';
 
-const Login = () => {
+const Login = props => {
 
   const [credentials, setCredentials] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
 
   const login = e => {
     e.preventDefault();
+    setIsLoading(true);
     axiosWithAuth().post('http://localhost:5000/api/login', credentials)
     .then(res => {
-      localStorage.setItem('token', res.data.token);
-      //this.props.history.push('/');
+      //console.log(res.data.payload);
+      localStorage.setItem('token', res.data.payload);
+      props.history.push('/friends');
     }).catch(error => {
       console.log(error);
     })
@@ -22,6 +24,10 @@ const Login = () => {
       ...credentials,
       [e.target.name]: e.target.value,
     })
+  }
+
+  if (isLoading) {
+    return <div className="loader"></div>
   }
 
   return (
