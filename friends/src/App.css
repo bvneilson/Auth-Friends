@@ -51,3 +51,15 @@
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
+
+.friend-list {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 40px 0;
+}
+.friend {
+  width: 20%;
+  padding: 20px 2.5%;
+  margin: 20px 2.5%;
+  border: 1px solid black;
+}
